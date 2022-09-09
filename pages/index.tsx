@@ -8,6 +8,8 @@ import {
   SimpleGrid,
 } from "@mantine/core";
 import { IconArrowUpRight, IconArrowDownRight } from "@tabler/icons";
+import FirebaseCrud from "lib/firebase/crud";
+import CollectionNames from "lib/firebase/colNames";
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -84,3 +86,4 @@ export default function Dashboard() {
     </Layout>
   );
 }
+
