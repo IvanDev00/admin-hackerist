@@ -1,19 +1,20 @@
 import Layout from "@/components/layout/Layout";
 import { Button, Table } from "@mantine/core";
 import React from "react";
-import dtiRegistry from "Data/dtiRegistry.json";
+import birVerfication from "Data/birVerification.json";
 type Props = {};
 
-const DTIRegistry = (props: Props) => {
-  const rows = dtiRegistry.map((element) => (
+const BIRVerification = (props: Props) => {
+  const rows = birVerfication.map((element) => (
     <tr key={element.id}>
+      <td>{element.ownerName}</td>
       <td>{element.businessName}</td>
       <td>
         <Button color="indigo.6" size="xs">
-          View Form
+          View File
         </Button>
       </td>
-      <td>{element.proofOfPayment}</td>
+      <td>{element.dateSubmitted}</td>
       <td>
         <Button color="green.6">Approve</Button>
       </td>
@@ -22,14 +23,16 @@ const DTIRegistry = (props: Props) => {
       </td>
     </tr>
   ));
+
   return (
     <Layout>
       <Table highlightOnHover>
         <thead>
           <tr>
+            <th>Name of Owner</th>
             <th>Business Name</th>
-            <th>Form</th>
-            <th>Proof Of Payment</th>
+            <th>Mayors Permit</th>
+            <th>Date Submitted</th>
             <th></th>
             <th></th>
           </tr>
@@ -40,4 +43,4 @@ const DTIRegistry = (props: Props) => {
   );
 };
 
-export default DTIRegistry;
+export default BIRVerification;

@@ -90,9 +90,30 @@ const useStyles = createStyles((theme, _params, getRef) => {
 
 const data = [
   { link: "/", label: "Dashboard", icon: IconDashboard },
-  { link: "/request", label: "Request", icon: IconFiles },
   { link: "/report", label: "Report", icon: IconFileReport },
   { link: "/application-dti", label: "DTI Applications", icon: IconNotes },
+  { link: "/dti-registry", label: "DTI Registry", icon: IconNotes },
+  {
+    link: "/mayors-verification",
+    label: "Mayor's Application",
+    icon: IconNotes,
+  },
+  {
+    link: "/mayors-registry",
+    label: "Mayor's Registry",
+    icon: IconNotes,
+  },
+
+  {
+    link: "/bir-registry",
+    label: "BIR Registry",
+    icon: IconNotes,
+  },
+  {
+    link: "/bir-verification",
+    label: "BIR Verification",
+    icon: IconNotes,
+  },
 ];
 
 export default function Layout({ children }) {

@@ -1,19 +1,22 @@
 import Layout from "@/components/layout/Layout";
 import { Button, Table } from "@mantine/core";
 import React from "react";
-import dtiRegistry from "Data/dtiRegistry.json";
+import mayorVerificationData from "Data/mayorVerificationData.json";
+
 type Props = {};
 
-const DTIRegistry = (props: Props) => {
-  const rows = dtiRegistry.map((element) => (
+const MayorsVerificationPage = (props: Props) => {
+  const rows = mayorVerificationData.map((element) => (
     <tr key={element.id}>
-      <td>{element.businessName}</td>
+      <td>{element.ownerName}</td>
       <td>
+        {" "}
         <Button color="indigo.6" size="xs">
-          View Form
+          View Certificate
         </Button>
       </td>
-      <td>{element.proofOfPayment}</td>
+      <td>{element.businessName}</td>
+      <td>{element.dateSubmitted}</td>
       <td>
         <Button color="green.6">Approve</Button>
       </td>
@@ -27,9 +30,10 @@ const DTIRegistry = (props: Props) => {
       <Table highlightOnHover>
         <thead>
           <tr>
+            <th>Owner Name</th>
+            <th>Certificate</th>
             <th>Business Name</th>
-            <th>Form</th>
-            <th>Proof Of Payment</th>
+            <th>Date Submitted</th>
             <th></th>
             <th></th>
           </tr>
@@ -40,4 +44,4 @@ const DTIRegistry = (props: Props) => {
   );
 };
 
-export default DTIRegistry;
+export default MayorsVerificationPage;
