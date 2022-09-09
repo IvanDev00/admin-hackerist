@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { createStyles, Navbar, Group, Box, Title } from "@mantine/core";
-import { IconLogout, IconDashboard, IconFiles } from "@tabler/icons";
+import {
+  IconLogout,
+  IconDashboard,
+  IconFiles,
+  IconFileReport,
+  IconNotes,
+} from "@tabler/icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -85,6 +91,8 @@ const useStyles = createStyles((theme, _params, getRef) => {
 const data = [
   { link: "/", label: "Dashboard", icon: IconDashboard },
   { link: "/request", label: "Request", icon: IconFiles },
+  { link: "/report", label: "Report", icon: IconFileReport },
+  { link: "/application-dti", label: "DTI Applications", icon: IconNotes },
 ];
 
 export default function Layout({ children }) {

@@ -6,11 +6,14 @@ import {
   Text,
   ThemeIcon,
   SimpleGrid,
+  Table,
+  Stack,
 } from "@mantine/core";
 import { IconArrowUpRight, IconArrowDownRight } from "@tabler/icons";
 import FirebaseCrud from "lib/firebase/crud";
 import CollectionNames from "lib/firebase/colNames";
-
+import byLocationData from "Data/byLocationData.json";
+import industriesData from "Data/industriesData.json";
 const BusinessOwner = FirebaseCrud(CollectionNames.BUSINESS_OWNER);
 const Application = FirebaseCrud(CollectionNames.APPLICATION);
 
@@ -242,19 +245,56 @@ export function StatsGridIcons({ data }: StatsGridIconsProps) {
 }
 
 export default function Dashboard() {
+  const location = byLocationData.map((element) => (
+    <tr key={element.id}>
+      <td>{element.locationByCity}</td>
+      <td>{element.numberOfBusiness}</td>
+    </tr>
+  ));
+
+  const industry = industriesData.map((element) => (
+    <tr key={element.id}>
+      <td>{element.industries}</td>
+      <td>{element.numberOfBusiness}</td>
+    </tr>
+  ));
+
   return (
     <Layout>
       <h1>Dashboard</h1>
-      <div>
+      <Stack spacing={60}>
         <StatsGridIcons
           data={[
-            { title: "sample", value: "value" },
-            { title: "sample", value: "value" },
-            { title: "sample", value: "value" },
+            { title: "DTI Appoved", value: "20" },
+            { title: "DTI Non Verified", value: "10" },
+            { title: "BIR Approved", value: "30" },
+            { title: "BIR Non Verified", value: "30" },
+            { title: "Mayor's Permit Approved", value: "30" },
+            { title: "Mayor's Permit Non Verified", value: "30" },
+            { title: "Pending Application", value: "30" },
+            { title: "Approved Application", value: "30" },
+            { title: "Rejected Application", value: "30" },
           ]}
         />
-      </div>
+        <Table highlightOnHover sx={{ overflowX: "auto" }}>
+          <thead>
+            <tr>
+              <th>Location of Business by City</th>
+              <th>Number of Businesses</th>
+            </tr>
+          </thead>
+          <tbody>{location}</tbody>
+        </Table>
+        <Table highlightOnHover sx={{ overflowX: "auto" }}>
+          <thead>
+            <tr>
+              <th>Business Industries</th>
+              <th>Number of Businesses</th>
+            </tr>
+          </thead>
+          <tbody>{industry}</tbody>
+        </Table>
+      </Stack>
     </Layout>
   );
 }
-
