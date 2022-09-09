@@ -11,6 +11,9 @@ import { IconArrowUpRight, IconArrowDownRight } from "@tabler/icons";
 import FirebaseCrud from "lib/firebase/crud";
 import CollectionNames from "lib/firebase/colNames";
 
+const BusinessOwner = FirebaseCrud(CollectionNames.BUSINESS_OWNER);
+const Application = FirebaseCrud(CollectionNames.APPLICATION);
+
 const useStyles = createStyles((theme) => ({
   root: {
     padding: theme.spacing.xl * 1.5,
@@ -23,6 +26,174 @@ const useStyles = createStyles((theme) => ({
 
 interface StatsGridIconsProps {
   data: { title: string; value: string }[];
+}
+
+async function read(id: any) {
+  try {
+    const data = await BusinessOwner.read(id);
+    console.log(data);
+    alert(JSON.stringify(data));
+  } catch (error) {
+    alert(error);
+  }
+}
+async function listCityAndNumberOfBusiness() {
+  try {
+    const data = await BusinessOwner.readAll();
+
+    let listCity = {};
+
+    for (let i in data) {
+      if (!(data[i].city in listCity)) {
+        listCity[data[i].city] = 1;
+      } else {
+        listCity[data[i].city] = listCity[data[i].city] + 1;
+      }
+    }
+    return listCity;
+    console.log(data);
+    alert(JSON.stringify(data));
+  } catch (error) {
+    alert(error);
+  }
+}
+
+async function totalNumberBusiness() {
+  try {
+    const data = await BusinessOwner.readAll();
+    return data.length;
+    console.log(data);
+    alert(JSON.stringify(data));
+  } catch (error) {
+    alert(error);
+  }
+}
+
+async function verifiedNumber() {
+  try {
+    const data = await BusinessOwner.readAll();
+
+    let verifiedData = {
+      bir: {
+        numberVerified: 0,
+        numberUnverified: 0,
+      },
+      dti: {
+        numberVerified: 0,
+        numberUnverified: 0,
+      },
+      mayor: {
+        numberVerified: 0,
+        numberUnverified: 0,
+      },
+    };
+
+    for (let i in data) {
+      if (data[i].bir_valid) {
+        verifiedData.bir.numberVerified = verifiedData.bir.numberVerified + 1;
+      } else {
+        verifiedData.bir.numberUnverified =
+          verifiedData.bir.numberUnverified + 1;
+      }
+
+      if (data[i].dti_valid) {
+        verifiedData.dti.numberVerified = verifiedData.dti.numberVerified + 1;
+      } else {
+        verifiedData.dti.numberUnverified =
+          verifiedData.dti.numberUnverified + 1;
+      }
+
+      if (data[i].mayor_valid) {
+        verifiedData.mayor.numberVerified =
+          verifiedData.mayor.numberVerified + 1;
+      } else {
+        verifiedData.mayor.numberUnverified =
+          verifiedData.mayor.numberUnverified + 1;
+      }
+    }
+    return verifiedData;
+    console.log(data);
+    alert(JSON.stringify(verifiedData));
+  } catch (error) {
+    alert(error);
+  }
+}
+
+async function listIndustriesAndNumberOfBusiness() {
+  try {
+    const data = await BusinessOwner.readAll();
+
+    let listIndustry = {};
+
+    for (let i in data) {
+      if (!(data[i].typeOfBusiness in listIndustry)) {
+        listIndustry[data[i].typeOfBusiness] = 1;
+      } else {
+        listIndustry[data[i].typeOfBusiness] =
+          listIndustry[data[i].typeOfBusiness] + 1;
+      }
+    }
+    return listIndustry;
+    console.log(data);
+    alert(JSON.stringify(data));
+  } catch (error) {
+    alert(error);
+  }
+}
+
+async function listApplicationAndNumber() {
+  try {
+    const data = await Application.readAll();
+
+    let listApplication = {};
+
+    for (let i in data) {
+      if (!(data[i].applicationTo in listApplication)) {
+        listApplication[data[i].applicationTo] = 1;
+      } else {
+        listApplication[data[i].applicationTo] =
+          listApplication[data[i].applicationTo] + 1;
+      }
+    }
+    return listApplication;
+    console.log(data);
+    alert(JSON.stringify(data));
+  } catch (error) {
+    alert(error);
+  }
+}
+
+async function listMarketPlaceAndNumber() {
+  try {
+    const data = await BusinessOwner.readAll();
+
+    let listApplication = {
+      lazada: 0,
+      shoppee: 0,
+      facebook: 0,
+      website: 0,
+    };
+
+    for (let i in data) {
+      if (data[i].facebookPage !== "") {
+        listApplication.facebook = listApplication.facebook + 1;
+      }
+      if (data[i].shoppeePage !== "") {
+        listApplication.shoppee = listApplication.shoppee + 1;
+      }
+      if (data[i].lazadaPage !== "") {
+        listApplication.lazada = listApplication.lazada + 1;
+      }
+      if (data[i].website !== "") {
+        listApplication.website = listApplication.facebook + 1;
+      }
+    }
+    return listApplication;
+    console.log(data);
+    alert(JSON.stringify(data));
+  } catch (error) {
+    alert(error);
+  }
 }
 
 export function StatsGridIcons({ data }: StatsGridIconsProps) {

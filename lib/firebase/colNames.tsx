@@ -4,6 +4,7 @@ enum CollectionNames {
   CONSUMER = "consumer",
   REPORT = "report",
   ADMIN = "admin",
+  APPLICATION = "application",
 }
 
 export default CollectionNames;
